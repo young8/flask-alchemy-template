@@ -18,8 +18,6 @@ def register_blueprints(app):
     app.register_blueprint(my_view)
 
 
-
-
 if __name__ == '__main__':
     app = create_app('config.Config')
     register_blueprints(app)
