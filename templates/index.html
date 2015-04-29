@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Demo Flask App
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <h1>Demo app!</h1>
+
+    {% if data %}
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Some String</th>
+            <th>Some Integer</th>
+            <th>Some Time</th>
+        </tr>
+        </thead>
+        {% for item in data %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.some_string }}</td>
+                <td>{{ item.some_integer }}</td>
+                <td>{{ item.some_time }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        No Data!
+
+    {% endif %}
+
+    <button>Click here to add some random data.</button>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/add_data.js') }}"></script>
+    <script>
+        {# We store this variable so that we know what URL to use in AJAX calls #}
+        $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+    </script>
+{% endblock %}
+
+
+{#
+Note: you can also put css/js in 'base.html' if you want it to apply to all templates
+which extend base.html (like this one)
+#}
